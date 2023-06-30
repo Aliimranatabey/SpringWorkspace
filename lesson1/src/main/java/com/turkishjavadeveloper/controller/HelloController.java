@@ -1,9 +1,6 @@
 package com.turkishjavadeveloper.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path="/api")
@@ -19,5 +16,20 @@ public class HelloController {
         return "Hello World";
     }
 
-    // GET  : Veri goruntulemek istedigimiz z
+    // GET    : Veri goruntulemek istedigimiz zaman kullaniyoruz.                   @GetMapping
+    // POST   : Veri kaydetmek istedigimiz zaman kullaniyoruz.                      @PostMapping
+    // PUT    : Veri guncellemek istedigimiz zaman kullaniyoruz.                    @PutMapping
+    // PATCH  : Verinin bir bolumunu guncellemek istedigimiz zaman kullaniyoruz.    @PatchMapping
+    //          Örn: Parola guncellemek gibi.
+    // DELETE : Veri silmek istedigimiz zaman kullaniyoruz.                         @DeleteMapping
+
+    @PostMapping(path="/save")
+    public String save(){
+        return "Data saved!";
+    }
+
+    @DeleteMapping(path="/delete")
+    public String delete(){
+        return "Data deleted!";
+    }
 }
