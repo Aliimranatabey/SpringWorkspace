@@ -1,6 +1,9 @@
 package com.turkishjavadeveloper.controller;
 
+import com.turkishjavadeveloper.model.User;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -29,13 +32,30 @@ public class MyController {
         return "Your message is : " + message;
     }
 
-    @GetMapping(path = {"/PathVariable/WithVariable/message5","/PathVariable/WithVariable/message5/{message}"})
-    public String getMyMessageWithVariable(@PathVariable(name="message",required = false) String message) { // Buradaki required defaul olarak true geliyor ancak biz false yaparak bir mesaj girilmeden de yani boş geçilerek de işlem yapabilmemizi sağlıyoruz .
+    @GetMapping(path = {"/PathVariable/WithVariable/message5", "/PathVariable/WithVariable/message5/{message}"})
+    public String getMyMessageWithVariable(@PathVariable(name = "message", required = false) String message) { // Buradaki required defaul olarak true geliyor ancak biz false yaparak bir mesaj girilmeden de yani boş geçilerek de işlem yapabilmemizi sağlıyoruz .
         return "Your message is : " + message;
     }
 
     @GetMapping(path = "/RequestParam/WithParam/message6")
-    public String getMyMessageWithParam(@RequestParam(name="message",required = false,defaultValue = "My Default Message") String message) { // Buradaki required defaul olarak true geliyor ancak biz false yaparak bir mesaj girilmeden de yani boş geçilerek de işlem yapabilmemizi sağlıyoruz .
+    public String getMyMessageWithParam(@RequestParam(name = "message", required = false, defaultValue = "My Default Message") String message) { // Buradaki required defaul olarak true geliyor ancak biz false yaparak bir mesaj girilmeden de yani boş geçilerek de işlem yapabilmemizi sağlıyoruz .
         return "Your message is : " + message;
     }
+
+    //@RequestBody anatasyonu @PathVariable ve @RequestParam anatasyonları gibi kullanıcıdan veri aldıgımız bir anatasyondur . Digerlerinden farklı kullanıcıdan obje seklinde veri aldigimiz bir anatasyondur .
+    @PostMapping("users")
+    public User saveUser(@RequestBody User user) {
+        System.out.println("User saved!");
+        user.setPassword("");
+        return user;
+    }
+
+    //Asagidaki gibi List olarak donersekde postmande kontrol edebilirsin girilen listeyi geri donderir.
+    @PostMapping("users-all")
+    public List<User> saveUser(@RequestBody List<User> users) {
+        System.out.println("User saved!");
+        users.forEach(user -> user.setPassword(""));
+        return users;
+    }
+
 }
