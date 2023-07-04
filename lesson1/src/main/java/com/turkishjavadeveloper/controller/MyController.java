@@ -58,4 +58,10 @@ public class MyController {
         return users;
     }
 
+    //Aşağıdaki methotta @RequestHeader("My-Header") içerisindeki "My-Header" , postman içerisinde headers bolumunde key kısmına yapıştırılır.
+    @GetMapping("/header")
+    public String getHeader(@RequestHeader("My-Header") String myHeader) {
+        return "Your header is : " + myHeader;
+    }
+
 }
